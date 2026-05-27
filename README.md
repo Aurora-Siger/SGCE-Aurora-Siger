@@ -50,7 +50,10 @@ O **SGCE** (Sistema de Gestão da Colônia Espacial) é desenvolvido como parte 
 
 O sistema simula o núcleo de controle energético de uma colônia marciana: a cada turno ele lê os dados gerados pelo simulador, avalia o estado atual da colônia e emite decisões automáticas de operação, além de projetar tendências futuras de geração e consumo.
 
-O projeto está fundamentado no **Capítulo 4 — As Estruturas Avançadas que Rastreiam Recursos e Informações da Colônia**, que aborda **Árvores Binárias de Busca (BST)**, **Árvores AVL**, **Red-Black Trees** e **Tabelas Hash** como pilares do gerenciamento eficiente de dados em sistemas críticos.
+As fases anteriores da Missão Aurora Siger produziram dois sistemas complementares. A Fase 1 desenvolveu o sistema de verificação pré-decolagem, responsável por validar as condições de segurança antes da partida. A Fase 2 implementou o MGPEB, que coordenou o pouso sequencial dos seis módulos em Arcadia Planitia utilizando filas, pilhas e validação dos três estágios de descida.
+
+Os módulos pousados na Fase 2 agora operam. O SGCE gerencia a energia da colônia: organiza os dados, toma decisões automáticas, prevê geração e analisa consumo. Os módulos utilizados foram definidos na Fase 2 e estão documentados no repositório do MGPEB: https://github.com/Aurora-Siger/MGPEB-Aurora-aproxima-Marte
+
 
 ---
 
@@ -305,7 +308,7 @@ O exemplo abaixo foi gerado com semente fixa para garantir reprodutibilidade na 
 
 **1. Clone o repositório**
 ```bash
-git clone https://github.com/seu-usuario/SGCE-Aurora-Siger.git
+git clone hhttps://github.com/Aurora-Siger/SGCE-Aurora-Siger.git
 cd SGCE-Aurora-Siger
 ```
 
@@ -377,54 +380,8 @@ ALERTA: consumo maior que geração.
 
 ---
 
-## 📚 Fundamentação Teórica
-
-O projeto aplica diretamente os conceitos do **Capítulo 4 — Árvores e Tabelas Hash**:
-
-### Tabelas Hash — Dicionários Python
-
-O mapeamento `setor → consumo_kw` usado em `gerar_consumo()` e acessado em `analisar_energia()` é uma **tabela hash nativa**:
-
-```python
-consumo_por_sistema = {
-    "suporte_vida": 23,   # hash("suporte_vida") → bucket → acesso O(1)
-    "habitacao":    15,
-    "logistica":    12,
-    "ciencia":      22,
-    "mineracao":    23
-}
-```
-
-Python implementa dicionários com **endereçamento aberto** e redimensionamento dinâmico, garantindo acesso médio **O(1)** — o mesmo desempenho descrito no capítulo para tabelas hash bem projetadas. Cada `consumo_por_sistema[setor]` dentro de `analisar_energia()` é uma operação de hash lookup.
-
-### Árvores de Busca — Histórico de Turnos
-
-O histórico carregado por `carregar_historico()` é uma lista ordenada por `turno`, funcionando como uma **BST implícita** onde a chave de busca é o número do turno. O `main.py` acessa o último turno com `historico[-1]` — equivalente a navegar direto ao nó mais à direita de uma BST.
-
-Em uma implementação de produção com centenas de turnos, indexar o histórico com uma **AVL Tree** ou **Red-Black Tree** garantiria acesso em **O(log n)** no pior caso, evitando a degeneração linear que ocorre em BSTs quando os turnos são inseridos em ordem crescente — exatamente o cenário descrito na seção 2.3.2 do capítulo.
-
-| Operação no SGCE | Estrutura atual | Complexidade | Com AVL/Red-Black |
-|---|---|---|---|
-| Acessar turno mais recente | Lista Python | O(1) | O(log n) |
-| Buscar turno específico | Lista Python | O(n) | **O(log n)** |
-| Acessar setor de consumo | Dict Python (hash) | **O(1)** | O(log n) |
-| Iterar todos os turnos | Lista Python | O(n) | O(n) |
-
----
-
-## 🔗 Referências
-
-| Conteúdo | Fonte |
-|---|---|
-| Árvores BST, AVL, Red-Black e complexidade O(log n) | Knuth, D. E. *The Art of Computer Programming*, Vol. 3, 1998 |
-| Tabelas Hash, colisões e endereçamento aberto | Cormen et al. *Introduction to Algorithms*. MIT Press, 2009 |
-| Capítulo 4 — Estruturas Avançadas que Rastreiam Recursos | Material didático FIAP — Aurora Siger, 2026 |
-| Fase 1 — Aurora Siger | [github.com/Aurora-Siger/Aurora-Siger](https://github.com/Aurora-Siger) |
-
----
-
 <div align="center">
 
-*Desenvolvido com ☕ e Python puro · FIAP 2026*
+*Desenvolvido com ☕ e Python · FIAP 2026*
 
 </div>
