@@ -12,7 +12,7 @@
 
 > Sistema de monitoramento e tomada de decisão energética da **Colônia Aurora Siger**.  
 > Processa geração solar e eólica, balanceia consumo por setor e emite alertas automáticos  
-> com base em regras operacionais — tudo fundamentado em **Árvores** e **Tabelas Hash**.
+> com base em regras operacionais — com **previsão adaptativa via regressão linear**.
 
 </div>
 
@@ -39,8 +39,6 @@
 - [Dataset](#-dataset)
 - [Como Executar](#-como-executar)
 - [Exemplo de Saída](#-exemplo-de-saída)
-- [Fundamentação Teórica](#-fundamentação-teórica)
-- [Referências](#-referências)
 
 ---
 
@@ -52,7 +50,7 @@ O sistema simula o núcleo de controle energético de uma colônia marciana: a c
 
 As fases anteriores da Missão Aurora Siger produziram dois sistemas complementares. A Fase 1 desenvolveu o sistema de verificação pré-decolagem, responsável por validar as condições de segurança antes da partida. A Fase 2 implementou o MGPEB, que coordenou o pouso sequencial dos seis módulos em Arcadia Planitia utilizando filas, pilhas e validação dos três estágios de descida.
 
-Os módulos pousados na Fase 2 agora operam. O SGCE gerencia a energia da colônia: organiza os dados, toma decisões automáticas, prevê geração e analisa consumo. Os módulos utilizados foram definidos na Fase 2 e estão documentados no repositório do MGPEB: https://github.com/Aurora-Siger/MGPEB-Aurora-aproxima-Marte
+Os módulos pousados na Fase 2 agora operam. O SGCE, da fase 3, gerencia a energia da colônia: organiza os dados, toma decisões automáticas, prevê geração e analisa consumo. Os módulos utilizados foram definidos na Fase 2 e estão documentados no repositório do MGPEB: https://github.com/Aurora-Siger/MGPEB-Aurora-aproxima-Marte
 
 
 ---
